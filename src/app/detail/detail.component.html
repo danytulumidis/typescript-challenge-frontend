@@ -5,6 +5,49 @@
   </button>
 </div>
 
-<span>Its very empty here (ಠ_ಠ)</span>
+@if (selectedStop()) {
+<div class="details">
+  <div class="stop-card">
+    <div class="stop-card-content">
+      <div class="stop-card-item">
+        <span class="stop-card-label">ID:</span>
+        <span class="stop-card-value">{{ selectedStop().id }}</span>
+      </div>
+      <div class="stop-card-item">
+        <span class="stop-card-label">Latitude:</span>
+        <span class="stop-card-value">{{ selectedStop().lat }}</span>
+      </div>
+      <div class="stop-card-item">
+        <span class="stop-card-label">Longitude:</span>
+        <span class="stop-card-value">{{ selectedStop().lng }}</span>
+      </div>
+      <div class="stop-card-item">
+        <span class="stop-card-label">Previous Stop ID:</span>
+        <span class="stop-card-value">{{ selectedStop().prevId || 'N/A' }}</span>
+      </div>
+      <div class="stop-card-item">
+        <span class="stop-card-label">Next Stop ID:</span>
+        <span class="stop-card-value">{{ selectedStop().nextId || 'N/A' }}</span>
+      </div>
+      <div class="stop-card-item">
+        <span class="stop-card-label">People On:</span>
+        <span class="stop-card-value">{{ selectedStop().peopleOn }}</span>
+      </div>
+      <div class="stop-card-item">
+        <span class="stop-card-label">People Off:</span>
+        <span class="stop-card-value">{{ selectedStop().peopleOff }}</span>
+      </div>
+      <div class="stop-card-item">
+        <span class="stop-card-label">Reachable Population (Bike):</span>
+        <span class="stop-card-value">{{ selectedStop().reachablePopulationBike }}</span>
+      </div>
+      <div class="stop-card-item">
+        <span class="stop-card-label">Reachable Population (Walk):</span>
+        <span class="stop-card-value">{{ selectedStop().reachablePopulationWalk }}</span>
+      </div>
+    </div>
+  </div>
+</div>
 
-<!-- TODO add more info about the stop -->
+<button class="delete" (click)="deleteStop()">Delete</button>
+}

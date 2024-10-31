@@ -22,7 +22,24 @@ const reducer = createReducer(
   on(TransitLinesActions.SelectStop, (state, { selectedStopId }) => ({
     ...state,
     selectedStopId,
-  }))
+  })),
+
+  on(TransitLinesActions.DeleteStop, (state, { lineId, selectedStopId }) => {
+    const line = state.entities[lineId]
+    if (!line) {
+      return state
+    }
+
+    const updatedStops = line.stops.filter((stop) => stop.id !== selectedStopId)
+
+    return transitLinesAdapter.updateOne(
+      {
+        id: lineId,
+        changes: { ...line, stops: updatedStops },
+      },
+      state
+    )
+  })
 )
 
 export function transitLinesReducer(state: TransitLinesState | undefined, action: Action): TransitLinesState {
